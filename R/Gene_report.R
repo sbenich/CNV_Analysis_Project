@@ -89,8 +89,8 @@ gene_report_deletion<-function(cnv_base_path, num_genes_top){
   }
 
   del_table<-cohort_deletion_list %>%
-    count(gene_name, sort=TRUE)%>%
-    top_n(num_genes_top)
+    count(gene_name, sort=TRUE) %>%
+    slice_head(n=num_genes_top)
 
   print(sprintf("Returning top %s deletion genes after analyzing %s files: ", num_genes_top, length(file_list)))
 
@@ -110,16 +110,18 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
     cnvfile_abs_path <- file.path(cnv_base_path, file)
     dataset <- read.csv(cnvfile_abs_path, sep="\t")
 
+
+
     print(paste("Running amplification analysis for this file: ", cnvfile_abs_path))
 
     patient_amplification_list <- get_amplification(dataset)
     cohort_amplification_list <-rbind(cohort_amplification_list, patient_amplification_list)
 
   }
-  
+
   amp_table<-cohort_amplification_list %>%
     count(gene_name, sort=TRUE) %>%
-    top_n(num_genes_top)
+    slice_head(n=num_genes_top)
 
   print(sprintf("Returning top %s deletion genes after analyzing %s files: ", num_genes_top, length(file_list)))
 
@@ -127,9 +129,9 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
 }
 
 #input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Data"
-#output_amp<-gene_report_amplification(input_path, 50)
+#output_amp<-gene_report_amplification(input_path, 3)
 #view(output_amp)
 
-#output_del<-gene_report_deletion(input_path, 50)
+#output_del<-gene_report_deletion(input_path, 3)
 #view(output_del)
 
