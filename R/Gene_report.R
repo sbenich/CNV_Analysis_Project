@@ -16,8 +16,8 @@ cohort_amplification_list <- data.frame()
 #' @param patient_file A data.frame containing single patient data from CNV file.
 #' @return The total data.frame of all amplified genes for given patient
 get_amplification <- function(patient_file){
-#  for(row in 1:nrow(patient_file)){
-   for(row in 1:100){
+  for(row in 1:nrow(patient_file)){
+#   for(row in 1:100){
     if (!is.data.frame(patient_file)){
       stop("input patient_file is not a data.frame; please check your inputs.")
     }
@@ -49,8 +49,8 @@ get_amplification <- function(patient_file){
 #' @param patient_file A data.frame containing single patient data from CNV file.
 #' @return The total data.frame of all deleted genes for given patient
 get_deletion <- function(patient_file){
-#  for(row in 1:nrow(patient_file)){
-   for(row in 1:100){
+  for(row in 1:nrow(patient_file)){
+#   for(row in 1:100){
      if (!is.data.frame(patient_file)){
        stop("input patient_file is not a data.frame; please check your inputs.")
      }
@@ -169,10 +169,19 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
   return(amp_table)
 }
 
-#input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Data"
-#output_amp<-gene_report_amplification(input_path, 0)
-#view(output_amp)
+input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Data"
 
-#output_del<-gene_report_deletion(input_path, 0)
-#view(output_del)
+start.time <- Sys.time()
+output_amp<-gene_report_amplification(input_path, 100)
+end.time <- Sys.time()
+time.taken <- round(end.time - start.time,2)
+print(paste("Time taken for amplification run is: ", time.taken))
+view(output_amp)
+
+start.time <- Sys.time()
+output_amp<-gene_report_deletion(input_path, 100)
+end.time <- Sys.time()
+time.taken <- round(end.time - start.time,2)
+print(paste("Time taken for deletion run is: ", time.taken))
+view(output_del)
 
