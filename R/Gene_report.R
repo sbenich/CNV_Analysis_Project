@@ -169,19 +169,19 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
   return(amp_table)
 }
 
-input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Data"
+#input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Data"
 
-start.time <- Sys.time()
-output_amp<-gene_report_amplification(input_path, 100)
-end.time <- Sys.time()
-time.taken <- round(end.time - start.time,2)
-print(paste("Time taken for amplification run is: ", time.taken))
-view(output_amp)
+#start.time <- Sys.time()
+#output_amp<-gene_report_amplification(input_path, 100)
+#end.time <- Sys.time()
+#time.taken <- round(end.time - start.time,2)
+#print(paste("Time taken for amplification run is: ", time.taken))
+#view(output_amp)
 
-start.time <- Sys.time()
-output_amp<-gene_report_deletion(input_path, 100)
-end.time <- Sys.time()
-time.taken <- round(end.time - start.time,2)
-print(paste("Time taken for deletion run is: ", time.taken))
-view(output_del)
+#start.time <- Sys.time()
+#output_amp<-gene_report_deletion(input_path, 100)
+#end.time <- Sys.time()
+#time.taken <- round(end.time - start.time,2)
+#print(paste("Time taken for deletion run is: ", time.taken))
+#view(output_del)
 
