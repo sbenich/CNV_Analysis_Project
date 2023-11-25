@@ -5,11 +5,18 @@ CNV Analysis Project created for BMI 540 course. This is an R package designed t
 1. To clone the repository to your local system, use this command in your terminal: 
   `git clone https://github.com/sbenich/CNV_Analysis_Project.git`
 ## Installation
+### For Mac
 1. Install R and RStudio. They can be downloaded at this [link](https://posit.co/download/rstudio-desktop/).
-2. Using `install.packages`, install R packages `tidyverse` , `dplyr`, `tidyr` and `devtools`.
+2. Using `install.packages`, install R packages `tidyverse` and `devtools`. *You may also need to install `Xcode` from the App Store.*
 3. Call `library("devtools")`.
 4. Then `install_github("sbenich/CNV_Analysis_Project")`.
 5. Call `library("CNVGeneReport")`.
+### For Windows
+1. Install R and RStudio. They can be downloaded at this [link](https://posit.co/download/rstudio-desktop/).
+2. Using `install.packages`, install R packages `Rtools`, `tidyverse` , and `devtools`. *You need to install `Rtools` before you can install the other packages.*
+4. Call `library("devtools")`.
+5. Then `install_github("sbenich/CNV_Analysis_Project")`.
+6. Call `library("CNVGeneReport")`.
 ## How to Use 
 ### Functions `get_amplification` and `get_deletion`
 1. If you would like to evaluate a single CNV file for a list of amplified genes or deleted gene
