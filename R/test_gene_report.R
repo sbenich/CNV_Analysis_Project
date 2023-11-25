@@ -2,8 +2,10 @@
 library(testthat)
 library(devtools)
 
-# setwd() to be where this test script is located. test data is also in this dir
-basepath = getwd() 
+# IMPORTANT: set basepath to be R directory of github project, in both
+# This script and in the console
+# example: "/users/sbenich/CNV_Analysis_Project/R"
+basepath = ""
 
 # Source the gene report file
 source(file.path(basepath, "Gene_report.R"))
