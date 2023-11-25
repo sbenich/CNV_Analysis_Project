@@ -18,6 +18,10 @@ cohort_amplification_list <- data.frame()
 get_amplification <- function(patient_file){
 #  for(row in 1:nrow(patient_file)){
    for(row in 1:100){
+    if (!is.data.frame(patient_file)){
+      stop("input patient_file is not a data.frame; please check your inputs.")
+    }
+
     if (is.na(patient_file[row,]$copy_number)){
       next # If copy_number undefined, skip iteration
     }
@@ -47,6 +51,10 @@ get_amplification <- function(patient_file){
 get_deletion <- function(patient_file){
 #  for(row in 1:nrow(patient_file)){
    for(row in 1:100){
+     if (!is.data.frame(patient_file)){
+       stop("input patient_file is not a data.frame; please check your inputs.")
+     }
+
     if (is.na(patient_file[row,]$copy_number)){
       next # If copy_number undefined, skip iteration
     }
@@ -91,8 +99,14 @@ gene_report_deletion<-function(cnv_base_path, num_genes_top){
       stop("File does not have .tsv extension.")
     }
 
-    dataset <- read.csv(cnvfile_abs_path, sep="\t")
+    dataset <- read.csv(cnvfile_abs_path, sep="\t", na.strings=c("","NA"))
+
     print(paste("Running deletion analysis for this file: ", cnvfile_abs_path))
+
+    if(sum(is.na(dataset$gene_name)) >= 1){
+      stop("There are NA values for gene_name in above file. Please check input data.")
+    }
+
     patient_deletion_list <-get_deletion(dataset)
     cohort_deletion_list <- rbind(cohort_deletion_list, patient_deletion_list)
   }
@@ -102,6 +116,9 @@ gene_report_deletion<-function(cnv_base_path, num_genes_top){
     slice_head(n=num_genes_top)
 
   print(sprintf("Returning top %s deletion genes after analyzing %s files: ", num_genes_top, length(file_list)))
+  if(nrow(del_table) < num_genes_top){
+    warning("Warning: Number of rows in deletion frequency table less than num_genes_top. Returning all rows.")
+  }
 
   return(del_table)
 }
@@ -126,8 +143,13 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
       stop("File does not have .tsv extension.")
     }
 
-    dataset <- read.csv(cnvfile_abs_path, sep="\t")
+    dataset <- read.csv(cnvfile_abs_path, sep="\t", na.strings=c("","NA"))
+
     print(paste("Running amplification analysis for this file: ", cnvfile_abs_path))
+
+    if(sum(is.na(dataset$gene_name)) >= 1){
+      stop("There are NA values for gene_name in above file. Please check input data.")
+    }
 
     patient_amplification_list <- get_amplification(dataset)
     cohort_amplification_list <-rbind(cohort_amplification_list, patient_amplification_list)
@@ -139,6 +161,10 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
     slice_head(n=num_genes_top)
 
   print(sprintf("Returning top %s deletion genes after analyzing %s files: ", num_genes_top, length(file_list)))
+
+  if(nrow(amp_table) < num_genes_top){
+    warning("Warning: Number of rows in amplification frequency table less than num_genes_top. Returning all rows.")
+  }
 
   return(amp_table)
 }
