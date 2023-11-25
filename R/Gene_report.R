@@ -76,6 +76,10 @@ get_deletion <- function(patient_file){
 #' @param num_genes_top Integer which specifies # of highest-frequency genes to return.
 #' @return Frequency table of deleted genes, with num_genes_top rows
 gene_report_deletion<-function(cnv_base_path, num_genes_top){
+  if (!(is.numeric(num_genes_top) && num_genes_top >= 1)){
+    stop("num_genes_top must be a number >= 1.")
+  }
+
   #remove the path line below later when making this a universal package
   #cnv_base_path <- "/Users/sidneybenich/Documents/ASU BMI Grad School/Fall '23/BMI 540/CNV_Files"
   file_list <- list.files(cnv_base_path, include.dirs = TRUE)
@@ -102,6 +106,10 @@ gene_report_deletion<-function(cnv_base_path, num_genes_top){
 #' @param num_genes_top Integer which specifies # of highest-frequency genes to return.
 #' @return Frequency table of amplified genes, with num_genes_top rows
 gene_report_amplification<-function(cnv_base_path, num_genes_top){
+  if (!(is.numeric(num_genes_top) && num_genes_top >= 1)){
+    stop("num_genes_top must be a number >= 1.")
+  }
+
   #remove the path line below later when making this a universal package
   #cnv_base_path <- "/Users/sidneybenich/Documents/ASU BMI Grad School/Fall '23/BMI 540/CNV_Files"
   file_list <- list.files(cnv_base_path, include.dirs = TRUE)
@@ -129,9 +137,9 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
 }
 
 #input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Data"
-#output_amp<-gene_report_amplification(input_path, 3)
+#output_amp<-gene_report_amplification(input_path, 0)
 #view(output_amp)
 
-#output_del<-gene_report_deletion(input_path, 3)
+#output_del<-gene_report_deletion(input_path, 0)
 #view(output_del)
 

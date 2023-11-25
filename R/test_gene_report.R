@@ -16,3 +16,14 @@ test_that("Top_n Rows are filtered",{
   expect_equal(nrow(test_amp_table), n)
 })
 
+test_that("Top_n Rows is greater than 1",{
+  input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Test/test_top_n"
+  n = 0
+  expect_error(gene_report_amplification(input_path, n))
+})
+
+test_that("Top_n Rows is an integer",{
+  input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Test/test_top_n"
+  n = "one"
+  expect_error(gene_report_amplification(input_path, n))
+})
