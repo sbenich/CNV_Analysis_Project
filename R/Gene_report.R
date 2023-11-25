@@ -86,6 +86,11 @@ gene_report_deletion<-function(cnv_base_path, num_genes_top){
 
   for(file in file_list){
     cnvfile_abs_path <- file.path(cnv_base_path, file)
+
+    if(!grepl("\\.tsv$", file)){ # File must have .tsv extension
+      stop("File does not have .tsv extension.")
+    }
+
     dataset <- read.csv(cnvfile_abs_path, sep="\t")
     print(paste("Running deletion analysis for this file: ", cnvfile_abs_path))
     patient_deletion_list <-get_deletion(dataset)
@@ -116,10 +121,12 @@ gene_report_amplification<-function(cnv_base_path, num_genes_top){
 
   for(file in file_list){
     cnvfile_abs_path <- file.path(cnv_base_path, file)
+
+    if(!grepl("\\.tsv$", file)){ # File must have .tsv extension
+      stop("File does not have .tsv extension.")
+    }
+
     dataset <- read.csv(cnvfile_abs_path, sep="\t")
-
-
-
     print(paste("Running amplification analysis for this file: ", cnvfile_abs_path))
 
     patient_amplification_list <- get_amplification(dataset)

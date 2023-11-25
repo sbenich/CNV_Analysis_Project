@@ -27,3 +27,9 @@ test_that("Top_n Rows is an integer",{
   n = "one"
   expect_error(gene_report_amplification(input_path, n))
 })
+
+test_that("Test for tsv file",{
+  input_path <- "/Users/sidneybenich/Documents/CNV Analysis Project/Test/test_tsv"
+  n = 5
+  expect_error(gene_report_amplification(input_path, n))
+})
