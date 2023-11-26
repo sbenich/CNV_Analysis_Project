@@ -21,4 +21,12 @@ CNV Analysis Project created for BMI 540 course. This is an R package designed t
 6. Call `library("CNVGeneReport")`.
 ## How to Use 
 ### Functions `get_amplification` and `get_deletion`
-1. If you would like to evaluate a single CNV file for a list of amplified genes or deleted gene
+1. If you would like to evaluate a single CNV file for a list of amplified genes or deleted gene, import a CNV file into a data.frame
+2. Call `get_amplification(df)` to get a table of all the genes with a copy number greater than 2
+3. Call`get_deletion(df)` to get a table of all the genes with a copy number less than 2
+### Functions `gene_report_amplification` and `gene_report_deletion`
+1. If you would like to evaluate a list of CNV files, identify the path where these files are stored
+2. Input the path (`cnv_base_path`) and the number of genes(`num_genes_top`) you would like returned, into `gene_report_amplification(cnv_base_path, num_genes_top)` or `gene_report_deletion(cnv_base_path, num_genes_top)`. 
+   - Files in `cnv_base_path` must be .tsv files
+   - `num_genes_top` must be an integer >=1
+3. The function will return a table of the top n frequent genes where amplification or deletion was observed within the entire file list, where n is `num_genes_top`.
