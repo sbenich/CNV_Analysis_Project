@@ -30,3 +30,15 @@ CNV Analysis Project created for BMI 540 course. This is an R package designed t
    - Files in `cnv_base_path` must be .tsv files
    - `num_genes_top` must be an integer >=1
 3. The function will return a table of the top n frequent genes where amplification or deletion was observed within the entire file list, where n is `num_genes_top`.
+## Unit Testing and Validation
+Used `testthat` function to test that:
+  - Top_n Rows are filtered according to the integer specified by `num_genes_top`
+  - Top_n Rows is greater than 1
+  - Top_n Rows is an integer
+  - Top_n is higher than amp/del Table Output: This checks that a warning message appears if results table has less rows than the specified `num_genes_top`
+  - Files input are tsv file: This checks that an error message appears if a file other than .tsv is input
+  - Missing gene_name rows: This checks that an error message appears if any row has a null value for gene_name
+  - Data input to get_x function(s) is a data.frame
+  - Gene Reports are accurate: This checks test files with known amplifications and deletions and compares generated outputs with expected outputs.
+
+*All test data is available in the test folder of this package*
