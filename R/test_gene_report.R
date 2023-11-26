@@ -7,6 +7,10 @@ library(devtools)
 # example: "/users/sbenich/CNV_Analysis_Project/R"
 basepath = ""
 
+if (basepath == ""){
+  stop("basepath has not been defined. Please set basepath to be R directory of github project.")
+}
+
 # Source the gene report file
 source(file.path(basepath, "Gene_report.R"))
 
@@ -62,4 +66,28 @@ test_that("get_x confirm that input is data.frame",{
   patient_file = "dummy_variable"
   expect_error(get_amplification(patient_file))
   expect_error(get_deletion(patient_file))
+})
+
+test_that("Gene Reports are accurate",{
+  input_path <- file.path(basepath, "test_data/test_accuracy")
+  n = 5
+
+  test_amp_table <- gene_report_amplification(input_path, n)
+  test_del_table <- gene_report_deletion(input_path, n)
+
+  print(test_amp_table)
+
+  # Testing 5 files with below expected amplification and deletion values.
+  # Also included copy_number of 2 for each gene. These should have no effect.
+  expect_equal(test_amp_table[test_amp_table$gene_name == "OR4G11P",]$n, 2)
+  expect_equal(test_amp_table[test_amp_table$gene_name == "AL627309.1",]$n, 2)
+  expect_equal(test_amp_table[test_amp_table$gene_name == "AL627309.3",]$n, 2)
+  expect_equal(test_amp_table[test_amp_table$gene_name == "CICP27",]$n, 2)
+  expect_equal(test_amp_table[test_amp_table$gene_name == "OR4F5",]$n, 2)
+
+  expect_equal(test_del_table[test_del_table$gene_name == "OR4G11P",]$n, 2)
+  expect_equal(test_del_table[test_del_table$gene_name == "AL627309.1",]$n, 2)
+  expect_equal(test_del_table[test_del_table$gene_name == "AL627309.3",]$n, 2)
+  expect_equal(test_del_table[test_del_table$gene_name == "CICP27",]$n, 2)
+  expect_equal(test_del_table[test_del_table$gene_name == "OR4F5",]$n, 1)
 })
